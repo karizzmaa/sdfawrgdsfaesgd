@@ -1,0 +1,52 @@
+{
+	"geode": ">=5.6.0",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"version": "v1.0.0",
+	"id": "papr1ka.gd-screensaver",
+	"name": "GD Screensaver",
+	"developer": "papr1ka",
+	"description": "Idle menu screensaver that auto-showcases random online rated levels.",
+	"settings": {
+		"enabled": {
+			"name": "Enable Screensaver",
+			"description": "Turns GD Screensaver on or off.",
+			"type": "bool",
+			"default": true
+		},
+		"idle-timeout-minutes": {
+			"name": "Idle Timeout",
+			"description": "Minutes of menu inactivity before the screensaver starts.",
+			"type": "int",
+			"default": 3,
+			"min": 1,
+			"max": 10
+		},
+		"transition-speed": {
+			"name": "Transition Speed",
+			"description": "Fade duration between levels and when entering or leaving screensaver mode.",
+			"type": "float",
+			"default": 0.6,
+			"min": 0.1,
+			"max": 2.0
+		},
+		"featured-epic-only": {
+			"name": "Featured / Epic Only",
+			"description": "Only use featured or epic rated levels.",
+			"type": "bool",
+			"default": false
+		},
+		"camera-speed": {
+			"name": "Camera Speed",
+			"description": "Multiplier for cinematic horizontal camera speed.",
+			"type": "float",
+			"default": 1.0,
+			"min": 0.5,
+			"max": 2.5
+		}
+	}
+}
