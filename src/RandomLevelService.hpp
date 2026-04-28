@@ -1,11 +1,14 @@
 #pragma once
 
 #include <Geode/Geode.hpp>
+#include <Geode/utils/web.hpp>
 
 #include <deque>
 #include <string>
 #include <unordered_set>
 #include <vector>
+
+using namespace geode::prelude;
 
 class RandomLevelService : public cocos2d::CCNode, public LevelDownloadDelegate {
 public:
