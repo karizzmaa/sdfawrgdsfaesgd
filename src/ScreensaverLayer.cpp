@@ -47,7 +47,7 @@ bool ScreensaverLayer::init() {
     this->addChild(background, 0);
 
     m_levelService = RandomLevelService::create();
-    this->addChild(m_levelService, 1);
+    this->addChild(m_levelService.data(), 1);
     m_levelService->setFeaturedEpicOnly(gdss::settings::featuredEpicOnly());
 
     m_fade = cocos2d::CCLayerColor::create({0, 0, 0, 255}, winSize.width, winSize.height);
@@ -136,12 +136,12 @@ void ScreensaverLayer::swapToNextLevel() {
 
     m_elapsed = 0.f;
 
-    m_cameraX = play->m_cameraPosition.x;
+    m_cameraX = (play->m_player1) ? play->m_player1->getPositionX() : 0.f;
     if (m_cameraX <= 0.f && play->m_player1) {
         m_cameraX = play->m_player1->getPositionX();
     }
 
-    m_cameraY = play->m_cameraPosition.y;
+    m_cameraY = (play->m_player1) ? play->m_player1->getPositionY() : 0.f;
     if (play->m_player1 && m_cameraY <= 0.f) {
         m_cameraY = play->m_player1->getPositionY();
     }
@@ -237,8 +237,6 @@ void ScreensaverLayer::updateCinematicCamera(float dt) {
     m_cameraY += (targetY - m_cameraY) * std::min(1.f, dt * 2.5f);
 
     cocos2d::CCPoint cameraPos = {m_cameraX, m_cameraY};
-    m_playLayer->m_cameraPosition = cameraPos;
-    m_playLayer->m_cameraPosition2 = cameraPos;
     m_playLayer->moveCameraToPos(cameraPos);
 
     if (m_playLayer->m_player1) {
