@@ -6,11 +6,6 @@
 #include <Geode/modify/CCTouchDispatcher.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 
-#if defined(GEODE_IS_WINDOWS)
-#include <Geode/modify/CCEGLView.hpp>
-struct GLFWwindow;
-#endif
-
 #include "ScreensaverController.hpp"
 
 using namespace geode::prelude;
@@ -60,19 +55,9 @@ class $modify(GDSSMouseScrollHook, cocos2d::CCMouseDispatcher) {
     }
 };
 
-#if defined(GEODE_IS_WINDOWS)
-class $modify(GDSSGLViewHook, cocos2d::CCEGLView) {
-    void onGLFWMouseCallBack(GLFWwindow* window, int button, int action, int mods) {
-        gdss::ScreensaverController::get().reportInput();
-        CCEGLView::onGLFWMouseCallBack(window, button, action, mods);
-    }
-
-    void onGLFWMouseMoveCallBack(GLFWwindow* window, double x, double y) {
-        gdss::ScreensaverController::get().reportInput();
-        CCEGLView::onGLFWMouseMoveCallBack(window, x, y);
-    }
-};
-#endif
+// onGLFWMouseCallBack and onGLFWMouseMoveCallBack are inline in the current
+// Geode bindings and cannot be hooked via $modify. Mouse input is already
+// captured through CCMouseDispatcher and CCTouchDispatcher above.
 
 class $modify(GDSSPlayLayerHook, PlayLayer) {
     void destroyPlayer(PlayerObject* player, GameObject* object) {
